@@ -1,4 +1,9 @@
- 
+//
+Fork changes:
+-Changed locktime and killtime inputs to seconds
+-Removed all time period restrictions on locktime and killtime
+//
+Original:
 PURPOSE
 =======
 

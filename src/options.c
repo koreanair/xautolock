@@ -268,41 +268,16 @@ addExecToCommand (const char** command)
 static void 
 lockTimeChecker (Display* d)
 {
-  if (lockTime < MIN_LOCK_MINS)
-  {
-    error1 ("Setting lock time to minimum value of %ld minute(s).\n",
-            (long) (lockTime = MIN_LOCK_MINS));
-  }
-  else if (lockTime > MAX_LOCK_MINS)
-  {
-    error1 ("Setting lock time to maximum value of %ld minute(s).\n",
-            (long) (lockTime = MAX_LOCK_MINS));
-  }
-
-  lockTime *= 60; /* convert to seconds */
+    return;
 }
 
-static void
-killTimeChecker (Display* d)
+static void killTimeChecker (Display* d)
 {
   if (killTimeSpecified && !killerSpecified)
   {
     error0 ("Using -killtime without -killer makes no sense.\n");
-    return;
   }
- 
-  if (killTime < MIN_KILL_MINS)
-  {
-    error1 ("Setting kill time to minimum value of %ld minute(s).\n",
-            (long) (killTime = MIN_KILL_MINS));
-  }
-  else if (killTime > MAX_KILL_MINS)
-  {
-    error1 ("Setting kill time to maximum value of %ld minute(s).\n",
-            (long) (killTime = MAX_KILL_MINS));
-  }
-
-  killTime *= 60; /* convert to seconds */
+  return;
 }
 
 static void
@@ -558,7 +533,7 @@ usage (int exitCode)
   */
   error0 ("\n");
   error1 ("Usage : %s ", progName);
-  error0 ("[-help][-version][-time mins][-locker locker]\n");
+  error0 ("[-help][-version][-time secs][-locker locker]\n");
   error1 ("%s[-killtime mins][-killer killer]\n", blanks);
   error1 ("%s[-notify margin][-notifier notifier][-bell percent]\n", blanks);
   error1 ("%s[-corners xxxx][-cornerdelay secs]\n", blanks);
@@ -575,7 +550,7 @@ usage (int exitCode)
   error2 (" [%d <= mins <= %d].\n", MIN_LOCK_MINS, MAX_LOCK_MINS);
   error0 (" -locker locker      : program used to lock.\n");
   error0 (" -nowlocker locker   : program used to lock immediately.\n");
-  error0 (" -killtime killmins  : time after locking at which to run\n");
+  error0 (" -killtime seconds  : time after locking at which to run\n");
   error2 ("                       the killer [%d <= killmins <= %d].\n",
                                   MIN_KILL_MINS, MAX_KILL_MINS);
   error0 (" -killer killer      : program used to kill.\n");
